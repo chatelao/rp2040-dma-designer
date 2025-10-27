@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>RP2040 DMA & Interrupt Configuration UI</title>
+    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/litegraph.js@0.7.18/css/litegraph.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="sidebar">
+        <button id="generate-button">Generate Code</button>
+        <button id="save-button">Save</button>
+        <button id="load-button">Load</button>
+        <input type="file" id="load-input" style="display: none;">
+        <h2>Nodes</h2>
+        <ul id="node-list">
+            <li class="node" draggable="true" data-type="dma/adc">ADC</li>
+            <li class="node" draggable="true" data-type="dma/memory">Memory</li>
+            <li class="node" draggable="true" data-type="dma/uart">UART</li>
+            <li class="node" draggable="true" data-type="dma/spi">SPI</li>
+            <li class="node" draggable="true" data-type="dma/i2c">I2C</li>
+            <li class="node" draggable="true" data-type="irq/cpu">CPU</li>
+        </ul>
+        <div id="properties-panel">
+            <h2>Properties</h2>
+            <div id="properties-content"></div>
+        </div>
+    </div>
+    <div id="editor">
+        <canvas id='mycanvas' width='1024' height='720'></canvas>
+    </div>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/litegraph.js@0.7.18/build/litegraph.js"></script>
+    <script src="nodes/adc.js"></script>
+    <script src="nodes/memory.js"></script>
+    <script src="nodes/uart.js"></script>
+    <script src="nodes/spi.js"></script>
+    <script src="nodes/i2c.js"></script>
+    <script src="nodes/cpu.js"></script>
+    <script src="script.js"></script>
+
+    <div id="code-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <pre id="code-output"></pre>
+        </div>
+    </div>
+</body>
+</html>
