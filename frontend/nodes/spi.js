@@ -1,7 +1,8 @@
 
 function SPINode() {
-    this.addInput("DMA_DATA_IN", "DMA_DATA");
-    this.addOutput("DMA_DATA_OUT", "DMA_DATA");
+    this.addInput("DMA_DATA_in", "DMA_DATA");
+    this.addOutput("DMA_DATA_out", "DMA_DATA");
+    this.addOutput("IRQ_OUT", "IRQ");
     this.properties = {
         spi: 0,
         tx_pin: 3,
@@ -13,5 +14,5 @@ function SPINode() {
 }
 
 SPINode.title = "SPI";
-SPINode.desc = "SPI DMA Source/Destination";
+SPINode.desc = "SPI DMA Source/Destination & Interrupt Source";
 LiteGraph.registerNodeType("dma/spi", SPINode);

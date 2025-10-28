@@ -8,7 +8,7 @@ def generate_code(graph):
     pio_programs = set()
 
     for node in graph['nodes']:
-        if node['type'] == 'adc_source':
+        if node['type'] == 'dma/adc':
             pin = node['properties']['pin']
 
             includes.add("#include <stdio.h>")
@@ -28,8 +28,8 @@ def generate_code(graph):
         sleep_ms(500);
     }}
 """
-        elif node['type'] == 'pio_uart_rx':
-            pin = node['properties']['pin']
+        elif node['type'] == 'dma/uart':
+            pin = node['properties']['rx_pin']
             baudrate = node['properties']['baudrate']
 
             includes.add("#include <stdio.h>")
@@ -50,7 +50,7 @@ def generate_code(graph):
         putchar(c);
     }}
 """
-        elif node['type'] == 'memory_target':
+        elif node['type'] == 'dma/memory':
             address = node['properties']['address']
 
             # This is a conceptual representation. In a real scenario,
@@ -58,7 +58,7 @@ def generate_code(graph):
             main_body += f"""
     // Data would be written to {address}
 """
-        elif node['type'] == 'cpu':
+        elif node['type'] == 'irq/cpu':
             core = node['properties']['core']
 
             # This is a conceptual representation of code that would run on the CPU.
