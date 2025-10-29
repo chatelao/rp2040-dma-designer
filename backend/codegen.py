@@ -1,11 +1,7 @@
-
 def generate_code(graph):
     code = ""
     includes = set()
     main_body = ""
-
-    # Add a set to keep track of PIO programs that need to be included
-    pio_programs = set()
 
     for node in graph['nodes']:
         if node['type'] == 'dma/adc':
@@ -24,7 +20,8 @@ def generate_code(graph):
     while (1) {{
         const float conversion_factor = 3.3f / (1 << 12);
         uint16_t result = adc_read();
-        printf("Raw value: 0x%03x, voltage: %f V\\n", result, result * conversion_factor);
+        printf("Raw value: 0x%03x, voltage: %f V\\n",
+               result, result * conversion_factor);
         sleep_ms(500);
     }}
 """
@@ -54,14 +51,14 @@ def generate_code(graph):
             address = node['properties']['address']
 
             # This is a conceptual representation. In a real scenario,
-            # we'd likely be writing data from another node to this address.
+            # we'd write data from another node to this address.
             main_body += f"""
     // Data would be written to {address}
 """
         elif node['type'] == 'irq/cpu':
             core = node['properties']['core']
 
-            # This is a conceptual representation of code that would run on the CPU.
+            # Conceptual representation of code that would run on the CPU.
             main_body += f"""
     // CPU Core {core} is waiting for an interrupt...
 """
